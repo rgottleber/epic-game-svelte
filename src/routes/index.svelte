@@ -1,13 +1,12 @@
 <script>
 	import { onMount } from 'svelte';
 	import { ethers } from 'ethers';
-	import Miner from '../contracts/Miner.json';
-	import GetDwarf from '../components/GetDwarf.svelte';
-	import SetDwarf from '../components/SetDwarf.svelte';
+	import MyEpicGame from '../contracts/MyEpicGame.json';
+	import Arena from '../components/Arena.svelte';
 	$: account = null;
 	$: chainID = null;
 	let web3Props;
-	const contractAddress = '0x0Bd6e788347a0dE65558fB50003F65235d91dE56';
+	const contractAddress = '0x52F8B8508A8bf8e793C9EC94f654C9f79d73F6e3';
 	onMount(async () => {
 		try {
 			// Check if Web3 has been injected by the browser (MetaMask)
@@ -22,10 +21,10 @@
 			// Get the signer
 			const signer = provider.getSigner();
 			// Get the contract
-			const minerContract = new ethers.Contract(contractAddress, Miner.abi, signer);
+			const gameContract = new ethers.Contract(contractAddress, MyEpicGame.abi, signer);
 			// update the props for the components
 			web3Props = {
-				minerContract
+				gameContract
 			};
 			// Get the accounts
 			const accounts = await ethereum.request({ method: 'eth_accounts' });
@@ -53,7 +52,7 @@
 	}
 </script>
 
-<h1>⛏️ Who's Adding Blocks? ⛏️</h1>
+<h1>🏦 The Evil Bank Rizes 🏦</h1>
 <p>
 	Contract can be found <a href={`https://rinkeby.etherscan.io/address/${contractAddress}`}
 		>on Etherscan</a
@@ -74,8 +73,7 @@
 	<p>Currency Symbol: ETH</p>
 	<p>Block Explorer URL: https://rinkeby.etherscan.io</p>
 {:else}
-	<SetDwarf {...web3Props} />
-	<GetDwarf {...web3Props} />
+	<Arena {...web3Props} />
 {/if}
 
 <style>
