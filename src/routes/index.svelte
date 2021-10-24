@@ -6,7 +6,7 @@
 	$: account = null;
 	$: chainID = null;
 	let web3Props;
-	const contractAddress = '0x52F8B8508A8bf8e793C9EC94f654C9f79d73F6e3';
+	const contractAddress = '0x3348Ac20961464B8b9de131aEb7A52CF2bcDDdD4';
 	onMount(async () => {
 		try {
 			// Check if Web3 has been injected by the browser (MetaMask)
